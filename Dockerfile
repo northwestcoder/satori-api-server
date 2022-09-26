@@ -6,4 +6,4 @@ COPY . /app
 WORKDIR /app
 RUN pip install -r requirements.txt
 ENTRYPOINT ["python"]
-CMD ["firebase2appsheet.py"]
+CMD ["FLASK_APP=satori.py flask run"]
