@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block body %}
+
+<table cellpadding="10" align="left">
+  <tr bgcolor="#ffffff"><td>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="https://satoricyber.com/wp-content/uploads/LogoDark2.svg" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</td></tr></table>
+
+<br/><br/><br/>
+
+  <div><b>YOUR ACCESS WAS CREATED</b></div>
+
+<table cellpadding="10" class="small">
+      {% for key, value in result.items() %}
+
+    <tr class="small">
+       <td class="small"> {{ key }} </td>
+       <td class="small"> {{ value }} </td>
+    </tr>
+
+
+    {% endfor %}
+</table>
+
+    
+
+{% endblock %}
+{% block scripts %}
+{% endblock %}

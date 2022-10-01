@@ -1,0 +1,45 @@
+body {
+  margin: 50px;
+  width: 625px;
+  font-family: Arial, Helvetica, Tahoma, Geneva, sans-serif;
+  color: #1C1F62;
+  background: #ffffff;
+  border: 1px solid rgba(255,255,255,0.3);
+  border-radius: 10px;
+}
+
+.login-input {
+  width: 130px;
+}
+
+.form-button {
+  width: 80px;
+  height: 35px;
+}
+
+.small {
+font-size: 9px;
+
+
+}
+
+.signup-box {
+  margin: auto;
+  width: 325px;
+  background: rgba(255,0,255,0.05);
+  border: 1px solid rgba(255,255,255,0.3);
+  border-radius: 10px;
+}
+
+.settings-box {
+  margin: auto;
+  width: 325px;
+}
+
+.signup-area {
+  padding: 30px;
+}
+
+.settings-area {
+  padding: 30px;
+}
