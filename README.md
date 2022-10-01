@@ -25,7 +25,7 @@ security_policy_id	= ""
 - Fill in all of the values (using the quotes) in your new ```satori.py``` file or else this example will fail. 
 	- Use the Satori documentation to find account and service account info. 
 	- ```apihost```: defaults to app.satoricyber.com
-	- ```apikey```: is a made up token/secret to protect this relay server. Enter a unique and strong value and then use that value in url requests (see below)
+	- ```apikey```: is a made up token/secret to protect this relay server. Enter a unique and strong value here, and then also use that value in url requests, see below. Note: this is a test harness - do not do this in production!
 	- ```security_policy_id```: the desired Policy, its ID has to be looked up manually in the Satori UX.
 
 - Deploy this project: navigate to where you have downloaded it, and run: ```gcloud run deploy```
