@@ -49,9 +49,11 @@ The ```/adduser``` path expects the following parameters:
 
 _Which Security Policy does the user get? At present time, you will need to know the security_policy_id ahead of time, and data enter that into satori.py before running this server._
 
-Complete URL Example: 
+A Complete URL Example: 
 
 ```https://<the.gcloud.deployed.url.app>/adduser?apikey=asdklj33489&email=youremail@yourcompany.com&dataset=A%20Satori%20Dataset&duration=20```
 
-This would add youremail@yourcompany.com to a Satori dataset called "A Satori Dataset" for the next 20 hours.
-
+- This would add youremail@yourcompany.com,
+- to a Satori dataset called "A Satori Dataset",
+- valid for the next 20 hours. 
+- If the URL request was successful, you will see a web page with the Satori response payload, containing various system details about the permission you have just added.
