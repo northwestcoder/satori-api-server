@@ -24,12 +24,13 @@ security_policy_id	= ""
 
 - Fill in all of the values in this new ```satori.py``` file or else this example will fail. 
 	- Use the Satori documentation to find account and service account info. 
-	- apihost defaults to app.satoricyber.com
-	- security_policy_id has to be looked up manually in the UX
-	- apikey is a made up token/secret to protect this relay server. Enter a unique and strong value and then use that value in url requests (see below)
+	- ```apihost```: defaults to app.satoricyber.com
+	- ```apikey```: is a made up token/secret to protect this relay server. Enter a unique and strong value and then use that value in url requests (see below)
+	- ```security_policy_id```: the desired Policy, its ID has to be looked up manually in the Satori UX.
+
 - Deploy this project: navigate to where you have downloaded it, and run: ```gcloud run deploy```
 
-You can run locally with:
+You can also run locally with:
 
 - ```pip install -r requirements.txt```
 - ```python main.py```
@@ -46,7 +47,7 @@ The ```/adduser``` path expects the following parameters:
 - dataset: the name of the Satori Dataset to which you want to add this email/user.
 - duration: the number of hours this permission is allowed, after which the permission will expire.
 
-_Which Security Policy does the user get? At present time, you will need to know the security_policy_id ahead of time, and data enter that into satori.py as discussed above._
+_Which Security Policy does the user get? At present time, you will need to know the security_policy_id ahead of time, and data enter that into satori.py before running this server_
 
 Complete URL Example: 
 
