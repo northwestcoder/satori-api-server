@@ -9,7 +9,7 @@ def get_policy_id_by_name(satori_token, policy_name):
     'Content-Type': 'application/json'
      }
 
-    policy_url =  "https://{}/api/v1/dataset?accountId={}&search={}".format(satori.host, satori.account_id, dataset_name)
+    policy_url =  "https://{}/api/v1/dataset?accountId={}&search={}".format(satori.apihost, satori.account_id, dataset_name)
 
     try:
         policy_response = requests.get(policy_url, headers=policy_headers)

@@ -18,13 +18,13 @@ apikey 			= ""
 serviceaccount_id 	= ""
 serviceaccount_key	= ""
 account_id		= ""
-host			= "app.satoricyber.com"
+apihost			= "app.satoricyber.com"
 security_policy_id	= ""
 ```
 
 - Fill in all of the values in this new ```satori.py``` file or else this example will fail. 
 	- Use the Satori documentation to find account and service account info. 
-	- Host defaults to app.satoricyber.com
+	- apihost defaults to app.satoricyber.com
 	- security_policy_id has to be looked up manually in the UX
 	- apikey is a made up token/secret to protect this relay server. Enter a unique and strong value and then use that value in url requests (see below)
 - Deploy this project: navigate to where you have downloaded it, and run: ```gcloud run deploy```

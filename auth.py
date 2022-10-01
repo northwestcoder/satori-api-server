@@ -6,7 +6,7 @@ import requests
 
 def satori_auth():
 	authheaders = {'content-type': 'application/json','accept': 'application/json'}
-	url = "https://{}/api/authentication/token".format(satori.host)
+	url = "https://{}/api/authentication/token".format(satori.apihost)
 	try:
 	    r = requests.post(url, 
 	                      headers=authheaders, 

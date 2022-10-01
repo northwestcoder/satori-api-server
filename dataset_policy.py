@@ -10,7 +10,7 @@ def get_dataset_policy_id(satori_token, dataset_id):
         'Content-Type': 'application/json'
         }
     
-    data_policy_url =  "https://{}/api/v1/dataset/{}".format(satori.host, dataset_id)
+    data_policy_url =  "https://{}/api/v1/dataset/{}".format(satori.apihost, dataset_id)
 
     try:
         policy_response = requests.get(data_policy_url, headers=data_policy_headers)

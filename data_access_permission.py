@@ -10,7 +10,7 @@ def add_user(satori_token, data_policy_id, email, expiration):
         'Content-Type': 'application/json'
         }
         
-    accessurl = "https://app.satoricyber.com/api/v1/data-access-permission?parentId=" + data_policy_id
+    accessurl = "https://{}/api/v1/data-access-permission?parentId={}".format(satori.apihost, data_policy_id)
 
     payload = json.dumps(
             {
