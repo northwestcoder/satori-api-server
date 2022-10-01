@@ -2,7 +2,6 @@ import satori
 import json
 import requests
 
-
 def get_dataset_policy_id(satori_token, dataset_id):
 
     data_policy_headers = {

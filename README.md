@@ -57,3 +57,6 @@ A Complete URL Example:
 - to a Satori dataset called "A Satori Dataset",
 - valid for the next 20 hours. 
 - If the URL request was successful, you will see a web page with the Satori response payload, containing various system details about the permission you have just added.
+
+
+Extra credit: we hardwired some additional default values in the POST payload in the file ```data_access_permissions.py``` - take a look there. :)

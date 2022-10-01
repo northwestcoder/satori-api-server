@@ -23,17 +23,20 @@ def adduser():
         request.args.get('email') is not None
         ):
 
-        dataset_name = request.args.get('dataset')
-        this_email = request.args.get('email')
-        duration = request.args.get('duration')
-        satori_expiration = datetime.datetime.utcnow() + datetime.timedelta(hours=int(duration)) 
+        dataset_name        = request.args.get('dataset')
+        this_email          = request.args.get('email')
+        duration            = request.args.get('duration')
+        satori_expiration   = datetime.datetime.utcnow() + datetime.timedelta(hours=int(duration)) 
 
         # FIRST, authenticate to Satori for a bearer token
         satori_token = auth.satori_auth()
+
         # SECOND, find our dataset
         dataset_id = dataset.get_dataset_id_by_name(satori_token, dataset_name)
+
         # THIRD, get overall data policy ID for the dataset
         data_policy_id = dataset_policy.get_dataset_policy_id(satori_token, dataset_id)
+
         # FOURTH, Now add our user to this data policy
         result = data_access_permission.add_user(satori_token, data_policy_id, this_email, satori_expiration)
 
