@@ -5,7 +5,7 @@ This is a Python Flask-based web app which communicates with the Satori platform
 
 It is meant to be deployed as a standalone server in such a manner that you would then connect to URL endpoints, submitting requests via parameters. This server would then call into the Satori Rest API with the info provided.
 
-This project was tested using Google Cloud Run; The dockerfile included here is ready to go for GCP. Short steps to deploy this project are:
+This project was tested using Google Cloud Run. The dockerfile included here is ready to go for GCP. Short GCP-specific steps to deploy this project:
 
 - Install ```gcloud``` command line tools (we have tested on macOS)
 - Log into google cloud from the command line with ```gcloud auth login```
@@ -47,7 +47,7 @@ The ```/adduser``` path expects the following parameters:
 - dataset: the name of the Satori Dataset to which you want to add this email/user.
 - duration: the number of hours this permission is allowed, after which the permission will expire.
 
-_Which Security Policy does the user get? At present time, you will need to know the security_policy_id ahead of time, and data enter that into satori.py before running this server_
+_Which Security Policy does the user get? At present time, you will need to know the security_policy_id ahead of time, and data enter that into satori.py before running this server._
 
 Complete URL Example: 
 
