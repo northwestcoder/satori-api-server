@@ -22,7 +22,7 @@ apihost			= "app.satoricyber.com"
 security_policy_id	= ""
 ```
 
-- Fill in all of the values in this new ```satori.py``` file or else this example will fail. 
+- Fill in all of the values (using the quotes) in your new ```satori.py``` file or else this example will fail. 
 	- Use the Satori documentation to find account and service account info. 
 	- ```apihost```: defaults to app.satoricyber.com
 	- ```apikey```: is a made up token/secret to protect this relay server. Enter a unique and strong value and then use that value in url requests (see below)
