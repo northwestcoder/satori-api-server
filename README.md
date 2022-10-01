@@ -46,6 +46,8 @@ The ```/adduser``` path expects the following parameters:
 - dataset: the name of the Satori Dataset to which you want to add this email/user.
 - duration: the number of hours this permission is allowed, after which the permission will expire.
 
+_At present time, you will need to know the security_policy_id ahead of time, and data enter that into satori.py as discussed above._
+
 Complete URL Example: 
 
 ```https://<the.gcloud.deployed.url.app>/adduser?apikey=asdklj33489&email=youremail@yourcompany.com&dataset=A%20Satori%20Dataset&duration=20```
