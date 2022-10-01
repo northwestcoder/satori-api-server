@@ -5,7 +5,7 @@ This is a Python Flask-based web app which communicates with the Satori platform
 
 It is meant to be deployed as a standalone server in such a manner that you would then connect to URL endpoints, submitting requests via parameters. This server would then call into the Satori Rest API with the info provided.
 
-This project was tested using Google Cloud Run, which is why we have a Dockerfile. Short steps to deploy this project are:
+This project was tested using Google Cloud Run; The dockerfile included here is ready to go for GCP. Short steps to deploy this project are:
 
 - Install ```gcloud``` command line tools (we have tested on macOS)
 - Log into google cloud from the command line with ```gcloud auth login```
@@ -22,8 +22,12 @@ host			= "app.satoricyber.com"
 security_policy_id	= ""
 ```
 
-- Fill in all of the values in satori.py or else this example will fail.
-- Deploy this project, navigate to where you have downloaded it, and run: ```gcloud run deploy```
+- Fill in all of the values in this new ```satori.py``` file or else this example will fail. 
+	- Use the Satori documentation to find account and service account info. 
+	- Host defaults to app.satoricyber.com
+	- security_policy_id has to be looked up manually in the UX
+	- apikey is a made up token/secret to protect this relay server. Enter a unique and strong value and then use that value in url requests (see below)
+- Deploy this project: navigate to where you have downloaded it, and run: ```gcloud run deploy```
 
 You can run locally with:
 
