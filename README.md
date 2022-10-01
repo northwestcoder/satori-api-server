@@ -14,11 +14,11 @@ This project was tested using Google Cloud Run. The dockerfile included here is 
 - Create a new file ```satori.py``` with this content:
 
 ```
-apikey 			= ""
+account_id		= ""
 serviceaccount_id 	= ""
 serviceaccount_key	= ""
-account_id		= ""
 apihost			= "app.satoricyber.com"
+apikey 			= ""
 security_policy_id	= ""
 ```
 
