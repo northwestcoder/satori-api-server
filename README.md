@@ -37,8 +37,11 @@ You can also run locally with:
 
 ___
 
-We have one simple example, https://<the.gcloud.deployed.url.app>/adduser. This endpoint will add a user to a Satori Dataset with a specified security policy and a specified duration.
+EXAMPLES:
 
+**1. Generic "/adduser" route**
+
+This endpoint will add a user to a Satori Dataset with a specified security policy and a specified duration.
 
 The ```/adduser``` path expects the following parameters:
 
@@ -60,3 +63,18 @@ A Complete URL Example:
 
 
 Extra credit: we hardwired some additional default values in the POST payload in the file ```data_access_permissions.py``` - take a look there. :)
+
+
+**2. JIRA add/remove routes**
+
+/jira/\<action\>
+
+e.g. /jira/add? or /jira/remove?
+
+Similar to the previous example, these routes are meant to be included in JIRA global automation. E.g. when a JIRA issue moves to a certain stage like "in progress" then let's add the current Jira user, e.g.:
+
+https://RELAY_URL/jira/add?dataset={{issue.summary.urlEncode}}&duration=3&apikey=RELAY_API_KEY&email={{issue.reporter.emailAddress.urlEncode}}
+
+And when the Jira ticket moves to closed, let's remove that user, e.g.:
+
+https://RELAY_URL/jira/remove?dataset={{issue.summary.urlEncode}}&duration=3&apikey=RELAY_API_KEY&email={{issue.reporter.emailAddress.urlEncode}}
