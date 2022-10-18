@@ -38,8 +38,10 @@ def add_user(satori_token, data_policy_id, email, expiration):
     except requests.exceptions.RequestException as err:
         print("assignment for dataset failed, is your dataset name valid? :", err)
         print("Exception TYPE:", type(err))
+        return response
     else:
-        return response.json()
+        print(response.status_code)
+        return response
 
 
 def find_access_id_to_remove_by_email(satori_token, data_policy_id, email):
@@ -81,6 +83,7 @@ def remove_access_id(satori_token, access_id):
     except requests.exceptions.RequestException as err:
         print("removal of access ID for dataset failed, is your user email or access ID valid? :", err)
         print("Exception TYPE:", type(err))
+        return response
     else:
         print(response.text)
         return response.text
