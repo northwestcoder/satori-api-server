@@ -2,14 +2,10 @@ import satori
 import json
 import requests
 
-def add_user(satori_token, data_policy_id, email, expiration):
+def add_user(satori_token, data_policy_id, email, expiration, security_policy_id):
 
     payload = {}
-    headers = {
-        'Authorization': 'Bearer {}'.format(satori_token),
-        'Content-Type': 'application/json'
-        }
-        
+    headers = {'Authorization': 'Bearer {}'.format(satori_token), 'Content-Type': 'application/json'}        
     accessurl = "https://{}/api/v1/data-access-permission?parentId={}".format(satori.apihost, data_policy_id)
 
     payload = json.dumps(
@@ -24,7 +20,7 @@ def add_user(satori_token, data_policy_id, email, expiration):
                 "shouldRevoke": True
               },
               "securityPolicyIds": [
-                satori.security_policy_id
+                security_policy_id
               ],
               "identity": {
                 "identityType": "USER",
@@ -47,12 +43,7 @@ def add_user(satori_token, data_policy_id, email, expiration):
 def find_access_id_to_remove_by_email(satori_token, data_policy_id, email):
 
     payload = {}
-    headers = {
-        'Authorization': 'Bearer {}'.format(satori_token),
-        'Content-Type': 'application/json'
-        }
-
-
+    headers = {'Authorization': 'Bearer {}'.format(satori_token), 'Content-Type': 'application/json'}
     removal_url = "https://{}/api/v1/data-access-permission?parentId={}&search={}".format(satori.apihost, data_policy_id, email)
 
     try:
@@ -62,19 +53,15 @@ def find_access_id_to_remove_by_email(satori_token, data_policy_id, email):
         print("removal of assignment for dataset failed, is your user email valid? :", err)
         print("Exception TYPE:", type(err))
     else:
-        return response.json()['records'][0]['id']
-
-
+        if response.json()['count'] > 0:
+            return response.json()['records'][0]['id']
+        else:
+            return "-1"
 
 def remove_access_id(satori_token, access_id):
 
     payload = {}
-    headers = {
-        'Authorization': 'Bearer {}'.format(satori_token),
-        'Content-Type': 'application/json'
-        }
-
-
+    headers = {'Authorization': 'Bearer {}'.format(satori_token), 'Content-Type': 'application/json'}
     removal_by_id_url = "https://{}/api/v1/data-access-permission/{}".format(satori.apihost, access_id)
 
     try:
@@ -87,3 +74,6 @@ def remove_access_id(satori_token, access_id):
     else:
         print(response.text)
         return response.text
+
+
+
