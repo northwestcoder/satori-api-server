@@ -1,10 +1,11 @@
 import satori
 import json
 import requests
-
-# Authenticate to Satori for a bearer token
+import time
 
 def satori_auth():
+
+	creation_time = time.time()
 	headers = {'content-type': 'application/json', 'accept': 'application/json'}
 	url = "https://{}/api/authentication/token".format(satori.apihost)
 	try:
@@ -18,4 +19,8 @@ def satori_auth():
 	    print("Bearer Token Failure: :", err)
 	    print("Exception TYPE:", type(err))
 	else:
-		return satori_token
+		print("new token created at: " + str(creation_time)) if satori.logging else None
+		print("token: " + str(satori_token)) if satori.logging else None
+		return [satori_token, creation_time]
+
+satori_token = satori_auth()

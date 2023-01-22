@@ -42,7 +42,7 @@ Once you have this flask server running, you would connect to it via HTTPS.
 
 **1. Generic _/satori/user/add_ and _/satori/user/remove_ routes**
 
-These endpoints will add or remove a user to a Satori Dataset with a specified security policy and a specified duration.
+These endpoints will add or remove a user (specifically, their email address) to a Satori Dataset with a specified security policy and a specified duration.
 
 These paths expects the following parameters:
 
@@ -66,4 +66,15 @@ To remove a user, just change "add" to "remove" in the URL path. You will no lon
 
 ```
 http://<the.gcloud.deployed.url.app>/satori/user/add?apikey=YOURAPIKEY&dataset=Secured%20Data&email=john123.789smith@gmail.com
+```
+
+
+**2. Generic _/satori/group/add_ and _/satori/group/remove_ routes**
+
+Similar to ```user``` above, these paths will add a Satori Local Group by name. If more than one group matches your URL, this code will add the first entry found.
+
+e.g. 
+
+```
+http://<the.gcloud.deployed.url.app>/satori/group/add?apikey=YOURAPIKEY&dataset=Secured%20Data&groupname=Data%20Science%20Team&duration=20&security_policy_id=SATORI_SECURITY_POLICY_ID
 ```
