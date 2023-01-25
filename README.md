@@ -16,14 +16,17 @@ account_id		= ""
 serviceaccount_id 	= ""
 serviceaccount_key	= ""
 apihost			= "app.satoricyber.com"
-apikey 			= ""
+apikey 			= "YOUR_NEW_MADE_UP_KEY"
+logging 		= True
 ```
 
 - Fill in all of the values (using the quotes) in your new ```satori.py``` file or else this example will fail. 
-	- Use the Satori documentation to find account and service account info. 
+	- Use the Satori documentation to find ```account_id```, ```serviceaccount_id``` and ```serviceaccount_key``` info. 
 	- ```apihost```: defaults to app.satoricyber.com
-	- ```apikey```: is a made up token/secret to protect this relay server. Enter a unique and strong value here, and then also use that value in url requests, see below. Note: this is a test harness - in production, instead of storing a secret or key inside code, you should instead look it up from a secret manager!
-	- ```security_policy_id```: the desired Policy, its ID has to be known ahead of time and looked up manually in the Satori UX, and then used in the URL parameters.
+	- ```apikey```: is a made up token/secret to protect this relay server. 
+		- Enter a unique and strong value here, and then also use that value in url requests or in the http header (either is supported)
+		- Note: this is a test harness - in production, instead of storing a secret or key inside code, you should instead look it up from a secret manager!
+	- ```logging```: If ```True```, detailed info is output to the console for debugging.
 
 - Deploy this project: navigate to where you have downloaded it, and run: ```gcloud run deploy```
 
@@ -78,3 +81,15 @@ e.g.
 ```
 http://<the.gcloud.deployed.url.app>/satori/group/add?apikey=YOURAPIKEY&dataset=Secured%20Data&groupname=Data%20Science%20Team&duration=20&security_policy_id=SATORI_SECURITY_POLICY_ID
 ```
+
+**1. Generic /satori/other/TYPE?apikey=YOURAPIKEY**
+
+For debugging or utility purposes, this route returns various other data types in Satori, where TYPE can be one of:
+
+- Custom Taxonomy
+- Data Access Controllers
+- Datasets
+- Locations
+- Masking Profiles
+- Security Policies
+- Standard Satori Taxonomy

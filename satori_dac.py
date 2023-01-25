@@ -1,0 +1,18 @@
+import json
+import requests
+import satori
+import satori_common
+
+def get_data_access_controllers(headers):
+
+	url = "https://{}/api/v1/data-access-controllers?accountId={}".format(satori.apihost, satori.account_id)
+
+	try:
+		response = requests.get(url, headers=headers)
+		response.raise_for_status()
+	except requests.exceptions.RequestException as err:
+		print("could not find taxonomy: ", err)
+		print("Exception TYPE:", type(err))
+	else:
+		print("retrieved taxonomy") if satori.logging else None
+		return response.json()

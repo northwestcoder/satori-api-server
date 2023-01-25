@@ -1,0 +1,18 @@
+import json
+import requests
+import satori
+import satori_common
+
+def get_all_masking_profiles(headers):
+
+	url = "https://{}/api/v1/masking?accountId={}&pageSize=1000".format(satori.apihost, satori.account_id)
+
+	try:
+		response = requests.get(url, headers=headers)
+		response.raise_for_status()
+	except requests.exceptions.RequestException as err:
+		print("could not find masking profiles: ", err)
+		print("Exception TYPE:", type(err))
+	else:
+		print("retrieved masking profiles") if satori.logging else None
+		return response.json()

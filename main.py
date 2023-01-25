@@ -16,10 +16,13 @@ import satori_data_access_groups
 
 from route_user import satori_user
 from route_group import satori_group
+from route_others import satori_others
 
 app = Flask(__name__)
 app.register_blueprint(satori_user)
 app.register_blueprint(satori_group)
+app.register_blueprint(satori_others)
 
 if __name__ == "__main__":
     app.run(debug=True, host="0.0.0.0", port=int(os.environ.get("PORT", 8080)))
+    satori_token = satori_common.satori_auth()

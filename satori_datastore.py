@@ -18,12 +18,9 @@ def get_datastores_from_dataset_id(headers, dataset_id):
 	else:
 		return response
 
-
-
 def get_one_datastore_connection(headers, datastore_id):
 
 	#gets a pretty string for a future dictionary, with name, type, hostname, and port 
-
 	url =  "https://{}/api/v1/datastore/{}".format(satori.apihost, datastore_id)
 
 	try:
@@ -40,3 +37,18 @@ def get_one_datastore_connection(headers, datastore_id):
 		host_and_port = response.json()['satoriHostname'] + ":" + str(response.json()['originPort'])
 
 		return {name_and_type : host_and_port}
+
+def get_all_datastores(headers):
+
+	url =  "https://{}/api/v1/datastore?accountId={}&pageSize=500".format(satori.apihost, satori.account_id)
+	print("trying to find all datastores: " + url) if satori.logging else None
+
+	try:
+		response = requests.get(url, headers=headers)
+		response.raise_for_status()
+	except requests.exceptions.RequestException as err:
+		#print(datastores_url)
+		print("could not find datastores: ", err)
+		print("Exception TYPE:", type(err))
+	else:
+		return response.json()
