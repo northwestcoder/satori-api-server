@@ -12,9 +12,7 @@ def get_datastores_from_dataset_id(headers, dataset_id):
 		response = requests.get(url, headers=headers)
 		response.raise_for_status()
 	except requests.exceptions.RequestException as err:
-		#print(datastores_url)
-		print("could not find data stores for this dataset: ", err)
-		print("Exception TYPE:", type(err))
+		print("EXCEPTION: ", type(err))
 	else:
 		return response
 
@@ -27,9 +25,7 @@ def get_one_datastore_connection(headers, datastore_id):
 		response = requests.get(url, headers=headers)
 		response.raise_for_status()
 	except requests.exceptions.RequestException as err:
-		#print(datastore_url)
-		print("could not find data store with this ID: ", err)
-		print("Exception TYPE:", type(err))
+		print("EXCEPTION: ", type(err))
 		return response
 	else:
 
@@ -47,8 +43,6 @@ def get_all_datastores(headers):
 		response = requests.get(url, headers=headers)
 		response.raise_for_status()
 	except requests.exceptions.RequestException as err:
-		#print(datastores_url)
-		print("could not find datastores: ", err)
-		print("Exception TYPE:", type(err))
+		print("EXCEPTION: ", type(err))
 	else:
 		return response.json()

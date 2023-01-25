@@ -11,8 +11,7 @@ def get_security_policies(headers):
 		response = requests.get(url, headers=headers)
 		response.raise_for_status()
 	except requests.exceptions.RequestException as err:
-		print("could not find security policies: ", err)
-		print("Exception TYPE:", type(err))
+		print("EXCEPTION: ", type(err))
 	else:
 		print("retrieved " + str(response.json()['count']) + " security policies") if satori.logging else None
 		return response.json()

@@ -12,8 +12,7 @@ def get_dataset_policy_id(headers, dataset_id):
 		response = requests.get(url, headers=headers)
 		response.raise_for_status()
 	except requests.exceptions.RequestException as err:
-		print("could not find data policy for this dataset: ", err)
-		print("Exception TYPE:", type(err))
+		print("EXCEPTION: ", type(err))
 	else:
 		dataset_policy_id = response.json()['dataPolicyId']
 		print("dataset policy id: " + dataset_policy_id) if satori.logging else None

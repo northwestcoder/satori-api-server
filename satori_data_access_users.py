@@ -33,8 +33,7 @@ def add_user(headers, data_policy_id, email, expiration, security_policy_id):
 		response = requests.post(url, headers=headers, data=payload)
 		response.raise_for_status()
 	except requests.exceptions.RequestException as err:
-		print("user assignment for dataset failed, user already existed or dataset invalid? :", err)
-		print("Exception TYPE:", type(err))
+		print("EXCEPTION: ", type(err))
 		return response
 	else:
 		print("USER ADDED, response: " + str(response.text)) if satori.logging else None
@@ -50,8 +49,7 @@ def find_access_id_to_remove_by_email(headers, data_policy_id, email):
 		response = requests.get(url, headers=headers)
 		response.raise_for_status()
 	except requests.exceptions.RequestException as err:
-		print("removal of assignment for dataset failed, is your user email valid? :", err)
-		print("Exception TYPE:", type(err))
+		print("EXCEPTION: ", type(err))
 	else:
 		if response.json()['count'] > 0:
 			return response.json()['records'][0]['id']
@@ -67,8 +65,7 @@ def remove_access_id(headers, access_id):
 		response = requests.delete(url, headers=headers)
 		response.raise_for_status()
 	except requests.exceptions.RequestException as err:
-		print("removal of access ID for dataset failed, is your user email or access ID valid? :", err)
-		print("Exception TYPE:", type(err))
+		print("EXCEPTION: ", type(err))
 		return response
 	else:
 		print("response code: " + str(response.status_code))

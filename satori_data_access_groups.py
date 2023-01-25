@@ -13,8 +13,7 @@ def get_group_id_by_name(headers, group_name):
 		response = requests.get(url, headers=headers)
 		response.raise_for_status()
 	except requests.exceptions.RequestException as err:
-		print("could not find group data: ", err)
-		print("Exception TYPE:", type(err))
+		print("EXCEPTION: ", type(err))
 	else:
 		# If multiple groups found, let's return the first one. Make sure your external app is specific enough here.
 		group_id = response.json()['records'][0]['id']
@@ -51,9 +50,7 @@ def add_group(headers, data_policy_id, group_id, expiration, security_policy_id)
 		response = requests.post(url, headers=headers, data=payload)
 		response.raise_for_status()
 	except requests.exceptions.RequestException as err:
-		print("group assignment for dataset failed, is your dataset name valid? :", err)
-		print("Exception TYPE:", type(err))
-		return response
+		print("EXCEPTION: ", type(err))		return response
 	else:
 		print("GROUP ADDED, response: " + str(response.text)) if satori.logging else None
 		return response
@@ -68,8 +65,7 @@ def find_access_id_to_remove_group(headers, data_policy_id, groupname):
 		response = requests.get(url, headers=headers)
 		response.raise_for_status()
 	except requests.exceptions.RequestException as err:
-		print("removal of group assignment for dataset failed, is your user email valid? :", err)
-		print("Exception TYPE:", type(err))
+		print("EXCEPTION: ", type(err))
 	else:
 		if response.json()['count'] > 0:
 			print("access id for existing group: " + response.json()['records'][0]['id']) if satori.logging else None
@@ -87,8 +83,7 @@ def remove_group(headers, group_id):
 		response = requests.delete(url, headers=headers)
 		response.raise_for_status()
 	except requests.exceptions.RequestException as err:
-		print("removal of group failed:", err)
-		print("Exception TYPE:", type(err))
+		print("EXCEPTION: ", type(err))
 		return response
 	else:
 		print("remove existing group: " + str(response.text)) if satori.logging else None

@@ -11,8 +11,7 @@ def get_all_masking_profiles(headers):
 		response = requests.get(url, headers=headers)
 		response.raise_for_status()
 	except requests.exceptions.RequestException as err:
-		print("could not find masking profiles: ", err)
-		print("Exception TYPE:", type(err))
+		print("EXCEPTION: ", type(err))
 	else:
 		print("retrieved masking profiles") if satori.logging else None
 		return response.json()

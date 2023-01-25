@@ -18,7 +18,6 @@ def satori_auth():
 		response = r.json()
 		satori_token = response["token"]
 	except Exception as err:
-		print("Bearer Token Failure: :", err)
 		print("Exception TYPE:", type(err))
 	else:
 		print("new token created at: " + str(creation_time)) if satori.logging else None

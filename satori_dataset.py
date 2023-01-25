@@ -12,8 +12,7 @@ def get_dataset_id_by_name(headers, dataset_name):
 		response = requests.get(url, headers=headers)
 		response.raise_for_status()
 	except requests.exceptions.RequestException as err:
-		print("could not find data policy for this dataset: ", err)
-		print("Exception TYPE:", type(err))
+		print("EXCEPTION: ", type(err))
 	else:
 		dataset_id = response.json()['records'][0]['id']
 		print("dataset id: " + dataset_id) if satori.logging else None
@@ -28,8 +27,7 @@ def get_all_datasets(headers):
 		response = requests.get(url, headers=headers)
 		response.raise_for_status()
 	except requests.exceptions.RequestException as err:
-		print("could not find datasets: ", err)
-		print("Exception TYPE:", type(err))
+		print("EXCEPTION: ", type(err))
 	else:
 		print("retrieved datasets") if satori.logging else None
 		return response.json()

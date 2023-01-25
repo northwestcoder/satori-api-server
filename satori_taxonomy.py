@@ -11,8 +11,7 @@ def get_taxonomy(headers):
 		response = requests.get(url, headers=headers)
 		response.raise_for_status()
 	except requests.exceptions.RequestException as err:
-		print("could not find taxonomy: ", err)
-		print("Exception TYPE:", type(err))
+		print("EXCEPTION: ", type(err))
 	else:
 		print("retrieved taxonomy") if satori.logging else None
 		return response.json()
@@ -25,8 +24,7 @@ def get_custom_taxonomy(headers):
 		response = requests.get(url, headers=headers)
 		response.raise_for_status()
 	except requests.exceptions.RequestException as err:
-		print("could not find taxonomy: ", err)
-		print("Exception TYPE:", type(err))
+		print("EXCEPTION: ", type(err))
 	else:
 		print("retrieved taxonomy") if satori.logging else None
 		return response.json()
