@@ -82,7 +82,7 @@ e.g.
 http://<the.gcloud.deployed.url.app>/satori/group/add?apikey=YOURAPIKEY&dataset=Secured%20Data&groupname=Data%20Science%20Team&duration=20&security_policy_id=SATORI_SECURITY_POLICY_ID
 ```
 
-**1. Generic /satori/other/TYPE?apikey=YOURAPIKEY**
+**3. Generic /satori/other/TYPE?apikey=YOURAPIKEY**
 
 For debugging or utility purposes, this route returns various other data types in Satori, where TYPE can be one of:
 
