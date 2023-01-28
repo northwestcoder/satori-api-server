@@ -6,7 +6,7 @@ import time
 
 import satori
 import satori_common
-import satori_bearer_token
+import satori_bearer_token as token
 import satori_errors as error
 import satori_dataset
 import satori_dataset_policy
@@ -26,10 +26,11 @@ def satori_add_or_remove_group(action):
 	# TODO: https://cloud.google.com/secret-manager/docs/reference/rest or
 	# TODO: https://docs.aws.amazon.com/secretsmanager/latest/userguide/retrieving-secrets_cache-python.html
 
+	# we look for the API key in the URL params, or in the https header
 	if satori.apikey in (request.args.get('apikey'), request.headers.get('apikey')):
 
 		# Authenticate to Satori for a bearer token every hour, else use cache
-		headers = satori_bearer_token.check_token()
+		headers = token.check_token()
 
 		if action == 'add':
 
@@ -39,18 +40,21 @@ def satori_add_or_remove_group(action):
 				request.args.get('groupname'), 
 				request.args.get('security_policy_id'))):
 
+				duration            = request.args.get('duration')
 				dataset_name        = request.args.get('dataset')
 				groupname           = request.args.get('groupname')
-				duration            = request.args.get('duration')
-				satori_expiration   = datetime.datetime.utcnow() + datetime.timedelta(hours=int(float(duration))) 
 				security_policy_id  = request.args.get('security_policy_id')
+				satori_expiration   = datetime.datetime.utcnow() + datetime.timedelta(hours=int(float(duration))) 
 
 				# find our dataset
 				dataset_id = satori_dataset.get_dataset_id_by_name(headers, dataset_name)
 				# get overall data policy ID for the dataset
 				data_policy_id = satori_dataset_policy.get_dataset_policy_id(headers, dataset_id)
 
+				# get group ID by name
 				group_id = satori_data_access_groups.get_group_id_by_name(headers, groupname)
+
+				#add group ID to access list for the dataset				
 				response = satori_data_access_groups.add_group(headers, data_policy_id, group_id, satori_expiration, security_policy_id)
 				
 				if response.status_code == 409:
@@ -82,6 +86,7 @@ def satori_add_or_remove_group(action):
 				data_policy_id = satori_dataset_policy.get_dataset_policy_id(headers, dataset_id)
 				# get the ID of our group that we want to remove from this data policy
 				group_id = satori_data_access_groups.get_group_id_by_name(headers, groupname)
+
 				group_access_id = satori_data_access_groups.find_access_id_to_remove_group(headers, data_policy_id, group_id)
 
 				# remove access by ID

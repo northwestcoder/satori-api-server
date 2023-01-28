@@ -5,6 +5,7 @@ import time
 import satori
 
 #helper function to get a new bearer token if older than one hour
+
 def satori_auth():
 
 	creation_time = time.time()

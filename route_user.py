@@ -7,7 +7,7 @@ import time
 import satori
 import satori_common
 import satori_errors as error
-import satori_bearer_token
+import satori_bearer_token as token
 import satori_dataset
 import satori_dataset_policy
 import satori_datastore
@@ -26,10 +26,11 @@ def satori_add_or_remove_user(action):
 	# TODO: https://cloud.google.com/secret-manager/docs/reference/rest or
 	# TODO: https://docs.aws.amazon.com/secretsmanager/latest/userguide/retrieving-secrets_cache-python.html
 
+	# we look for the API key in the URL params, or in the https header
 	if satori.apikey in (request.args.get('apikey'), request.headers.get('apikey')):
 
 		# Authenticate to Satori for a bearer token every hour, else use cache
-		headers = satori_bearer_token.check_token()
+		headers = token.check_token()
 
 		if action == 'add':
 
@@ -39,18 +40,20 @@ def satori_add_or_remove_user(action):
 				request.args.get('email'), 
 				request.args.get('security_policy_id'))):
 
+				duration            = request.args.get('duration')
 				dataset_name        = request.args.get('dataset')
 				this_email          = request.args.get('email')
-				duration            = request.args.get('duration')
-				satori_expiration   = datetime.datetime.utcnow() + datetime.timedelta(hours=int(float(duration))) 
 				security_policy_id  = request.args.get('security_policy_id')
+				satori_expiration   = datetime.datetime.utcnow() + datetime.timedelta(hours=int(float(duration))) 
 
 				# find our dataset
 				dataset_id = satori_dataset.get_dataset_id_by_name(headers, dataset_name)
+
 				# get overall data policy ID for the dataset
 				data_policy_id = satori_dataset_policy.get_dataset_policy_id(headers, dataset_id)
 
-				response = satori_data_access_users.add_user(headers, data_policy_id, this_email, satori_expiration, security_policy_id)
+				#add the user to our access list
+				response = satori_data_access_users.add_user(headers, data_policy_id, email, satori_expiration, security_policy_id)
 				
 				if response.status_code == 409:
 					return error.USER_EXISTS
@@ -73,16 +76,20 @@ def satori_add_or_remove_user(action):
 				request.args.get('email'))):
 
 				dataset_name        = request.args.get('dataset')
-				this_email          = request.args.get('email')
+				email          		= request.args.get('email')
 
 				# find our dataset
 				dataset_id = satori_dataset.get_dataset_id_by_name(headers, dataset_name)
+
 				# get overall data policy ID for the dataset
 				data_policy_id = satori_dataset_policy.get_dataset_policy_id(headers, dataset_id)
+				
 				# get the ID of our user that we want to remove from this data policy
-				access_id_to_remove = satori_data_access_users.find_access_id_to_remove_by_email(headers, data_policy_id, this_email)
+				access_id_to_remove = satori_data_access_users.find_access_id_to_remove_by_email(headers, data_policy_id, email)
+				
 				# remove access by ID
 				removal = requests.Response()
+				
 				if access_id_to_remove != "-1":
 					removal = satori_data_access_users.remove_access_id(headers, access_id_to_remove)
 

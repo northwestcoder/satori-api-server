@@ -35,11 +35,11 @@ def satori_get_others(action):
 			return response
 		elif action == 'taxonomy':
 			print("attempting to retrieve taxonomy") if satori.logging else None
-			response = satori_taxonomy.get_taxonomy(headers)
+			response = satori_taxonomy.get_all_satori_taxonomy(headers)
 			return response
 		elif action == 'custom_taxonomy':
 			print("attempting to retrieve custom taxonomy") if satori.logging else None
-			response = satori_taxonomy.get_custom_taxonomy(headers)
+			response = satori_taxonomy.get_all_custom_taxonomy(headers)
 			return response
 		elif action == 'data_access_controllers':
 			print("attempting to retrieve dacs") if satori.logging else None

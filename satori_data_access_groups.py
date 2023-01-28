@@ -50,7 +50,8 @@ def add_group(headers, data_policy_id, group_id, expiration, security_policy_id)
 		response = requests.post(url, headers=headers, data=payload)
 		response.raise_for_status()
 	except requests.exceptions.RequestException as err:
-		print("EXCEPTION: ", type(err))		return response
+		print("EXCEPTION: ", type(err))		
+		return response
 	else:
 		print("GROUP ADDED, response: " + str(response.text)) if satori.logging else None
 		return response
