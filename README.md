@@ -49,12 +49,14 @@ logging 		= True
 
 **AWS**: with some changes and testing, this docker/code approach will probably also work with AWS, e.g. their "app runner" product. 
 
-**Local deployment**: we tested with python 3.10.4 and recommend ```pyenv``` for your environment management, and then at the command line:
+**Local deployment**: 
 
+1. We tested with python 3.10.4 and recommend [pyenv](https://github.com/pyenv/pyenv) for your environment management. Assuming your python env is up and running:
+2. Create the satori.py file as above.
+3. at the command line:
 - ```pip install -r requirements.txt```
 - ```python main.py```
 
-You will still need to create satori.py as shown above in order to run this example.
 
 ___
 
