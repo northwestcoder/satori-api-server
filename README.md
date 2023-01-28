@@ -119,17 +119,18 @@ http://<the.gcloud.deployed.url.app>/satori/group/remove?apikey=YOURAPIKEY&datas
 Method: GET
 
 e.g. 
-```http://<the.gcloud.deployed.url.app>/satori/other/TYPE?apikey=YOURAPIKEY```
 
-For debugging or utility purposes, this route returns various other types of information in Satori, where TYPE can be one of:
+```
+http://<the.gcloud.deployed.url.app>/satori/other/custom_taxonomy
+http://<the.gcloud.deployed.url.app>/satori/other/datasets
+http://<the.gcloud.deployed.url.app>/satori/other/data_access_controllers
+http://<the.gcloud.deployed.url.app>/satori/other/datastores
+http://<the.gcloud.deployed.url.app>/satori/other/masking
+http://<the.gcloud.deployed.url.app>/satori/other/security_policies
+http://<the.gcloud.deployed.url.app>/satori/other/taxonomy
+```
 
-- custom_taxonomy
-- data_access_controllers
-- datasets
-- datastores
-- masking
-- security_policies
-- taxonomy
+For debugging or utility purposes, these routes returns various other types of information in Satori
 
 
 <a name="one_taxonomy"/>
@@ -141,9 +142,9 @@ Method: GET
 - For integrations with external data catalogue or inventory systems, this is a useful lookup pattern.
 - You can search by "name", "id" or "tag"
 - The general form of these GETS are:
-	- ```http://<the.gcloud.deployed.url.app>/satori/taxonomy/find_by_<action>?apikey=YOURAPIKEY&search=ID```
-	- ```http://<the.gcloud.deployed.url.app>/satori/taxonomy/find_by_<action>?apikey=YOURAPIKEY&search=NAME```
-	- ```http://<the.gcloud.deployed.url.app>/satori/taxonomy/find_by_<action>?apikey=YOURAPIKEY&search=TAG```
+	- ```http://<the.gcloud.deployed.url.app>/satori/taxonomy/find_by_id?search=YOURID```
+	- ```http://<the.gcloud.deployed.url.app>/satori/taxonomy/find_by_name?search=YOURNAME```
+	- ```http://<the.gcloud.deployed.url.app>/satori/taxonomy/find_by_tag?search=YOURTAG```
 	- where \<action\> is "name", "id" or "tag"
 - This will return a payload with the rest of the Custom Taxonomy, e.g. something like:
 
@@ -186,7 +187,7 @@ Method: POST
 
 Experimental
 
-/satori/taxonomy/create?apikey=YOURAPIKEY
+/satori/taxonomy/create
 
 Expects a valid json body for the post, see [Satori Docs](https://app.satoricyber.com/docs/api#post-/api/v1/taxonomy/custom/classifier) for more info.
 
@@ -201,10 +202,10 @@ There are two paths and methods in this example:
 
 First, you can retrieve all schema/table/column info associated with a Satori Datastore by using:
 
-```/satori/location/get_locations_by_datastore?apikey=YOURAPIKEY&datastore_id=YOUR_DATASTORE```
+```/satori/location/get_locations_by_datastore?datastore_id=YOUR_DATASTORE```
 
 This is the raw full list of all schemas, tables and columns that Satori has discovered.
 
 Second, you can retrieve all of the above, but only for info which has been classified by Satori (or by you, by hand):
 
-```/satori/location/get_tags_by_datastore?apikey=YOURAPIKEY&datastore_id=YOUR_DATASTORE```
+```/satori/location/get_tags_by_datastore?datastore_id=YOUR_DATASTORE```
