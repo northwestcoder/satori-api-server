@@ -1,7 +1,7 @@
 # satori-api-server
 **A relay server for communicating with the Satori Rest API**
 
-This is a Python Flask-based web app which communicates with the Satori platform. It is meant to be deployed as a standalone server, receiving URLs and parameters via a single GET, and then submitting requests to the Satori API using those parameters. 
+This is a Python Flask-based web app which communicates with the Satori platform. It is meant to be deployed as a standalone server, receiving URLs and parameters via a single GET (occassionally some POSTS) and then submitting requests to the Satori API using those parameters. 
 
 This is an example project meant for tutorial and learning purposes only.
 
@@ -20,13 +20,13 @@ ___
 
 ## Deployment
 
-This project was tested using Google Cloud Run. The dockerfile included here is ready to go for GCP. Short GCP-specific steps to deploy this project:
+**GCP**: This project was tested using Google Cloud Run. The dockerfile included here is ready to go for GCP. Short GCP-specific steps to deploy this project:
 
-10. Install ```gcloud``` command line tools (we have tested on macOS)
-20. Log into google cloud from the command line with ```gcloud auth login```
-30. Set your project with ```gcloud config set project YOUR_PROJECT_ID```
-40. Make sure Google Cloud Run API's are enabled for this project
-50. Create a new file ```satori.py``` with this content:
+1. Install ```gcloud``` command line tools (we have tested on macOS)
+2. Log into google cloud from the command line with ```gcloud auth login```
+3. Set your project with ```gcloud config set project YOUR_PROJECT_ID```
+4. Make sure Google Cloud Run API's are enabled for this project
+5. Create a new file ```satori.py``` with this content:
 
 ```
 account_id		= "YOUR_SATORI_ACCOUNT_ID"
@@ -37,7 +37,7 @@ apikey 			= "YOUR_NEW_MADE_UP_KEY"
 logging 		= True
 ```
 
-60. Update all of the values (using the quotes) in your new ```satori.py``` file or else this example will fail. 
+6. Update all of the values (using the quotes) in your new ```satori.py``` file or else this example will fail. 
 	- Use the Satori [documentation](https://app.satoricyber.com/docs/api) to find ```account_id```, ```serviceaccount_id``` and ```serviceaccount_key``` info. 
 	- ```apihost```: defaults to app.satoricyber.com, this can be left as is unless instructed otherwise.
 	- ```apikey```: this is a made up token/secret for this python example, to protect this relay server. 
@@ -45,7 +45,7 @@ logging 		= True
 		- Note: this is a test harness - in production, instead of storing a secret or key inside code, you should instead look it up from a secret manager!
 	- ```logging```: If ```True```, detailed info is output to the console for debugging.
 
-70. Deploy this project: navigate to where you have downloaded it, and run: ```gcloud run deploy```
+7. Deploy this project: navigate to where you have downloaded it, and run: ```gcloud run deploy```
 
 **AWS**: with some changes and testing, this docker/code approach will probably also work with AWS, e.g. their "app runner" product. 
 
