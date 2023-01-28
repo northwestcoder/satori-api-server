@@ -17,6 +17,7 @@ This is an example project meant for tutorial and learning purposes only.
 ___
 
 <a name="deploy"/>
+
 ## Deployment
 
 **GCP** 
@@ -68,6 +69,7 @@ _EXAMPLES:_
 _Once you have this flask server running in some cloud env or locally, you would then connect to it via browser/HTTPS for GETS and you would use a tool like Postman for POSTS, as indicated below._
 
 <a name="users"/>
+
 ## Generic _/satori/user/add_ and _/satori/user/remove_ routes
 
 Method: GET 
@@ -99,6 +101,7 @@ http://<the.gcloud.deployed.url.app>/satori/user/remove?apikey=YOURAPIKEY&datase
 ```
 
 <a name="groups"/>
+
 ## Generic _/satori/group/add_ and _/satori/group/remove_ routes
 
 Method: GET
@@ -114,6 +117,7 @@ http://<the.gcloud.deployed.url.app>/satori/group/remove?apikey=YOURAPIKEY&datas
 ```
 
 <a name="other"/>
+
 ## Generic /satori/other/TYPE
 
 Method: GET
@@ -130,6 +134,7 @@ http://<the.gcloud.deployed.url.app>/satori/other/taxonomy
 ```
 
 <a name="one_taxonomy"/>
+
 ## /satori/taxonomy/find_by
 
 Method: GET
@@ -174,6 +179,7 @@ Method: GET
 ```
 
 <a name="create_taxonomy"/>
+
 ## /satori/taxonomy/create
 
 Method: POST
@@ -182,6 +188,7 @@ Creates a single custom Satori Taxonomy. Experimental, WIP. Expects a valid json
 
 
 <a name="locations"/>
+
 ## Find Database Locations and Classifiers for a Datastore
 
 Method: GET
