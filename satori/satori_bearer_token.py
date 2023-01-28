@@ -2,8 +2,8 @@ import json
 import requests
 import time
 
-import satori
-import satori_common
+from satori import satori
+from satori import satori_common
 
 def check_token():
 

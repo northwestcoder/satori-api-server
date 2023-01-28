@@ -1,7 +1,8 @@
-import satori
 import json
 import requests
-import satori_common
+
+from satori import satori
+from satori import satori_common
 
 def get_dataset_policy_id(headers, dataset_id):
 

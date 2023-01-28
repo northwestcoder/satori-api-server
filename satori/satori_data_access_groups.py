@@ -1,7 +1,9 @@
-import satori
-import satori_common
 import json
 import requests
+
+
+from satori import satori
+from satori import satori_common
 
 def get_group_id_by_name(headers, group_name):
 

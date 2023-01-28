@@ -2,7 +2,7 @@ import json
 import requests
 import time
 
-import satori
+from satori import satori
 
 #helper function to get a new bearer token if older than one hour
 

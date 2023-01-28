@@ -4,11 +4,11 @@ from flask import Flask, redirect, url_for, Blueprint, request, render_template,
 import datetime
 import time
 
-import satori
-import satori_common
-import satori_bearer_token
-import satori_errors as error
-import satori_taxonomy as taxonomy
+from satori import satori
+from satori import satori_common
+from satori import satori_bearer_token
+from satori import satori_errors as error
+from satori import satori_taxonomy as taxonomy
 
 satori_taxonomy = Blueprint('satoritaxonomy', __name__)
 

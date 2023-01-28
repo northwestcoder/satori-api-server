@@ -1,7 +1,8 @@
-import satori
 import json
 import requests
-import satori_common
+
+from satori import satori
+from satori import satori_common
 
 def get_dataset_id_by_name(headers, dataset_name):
 

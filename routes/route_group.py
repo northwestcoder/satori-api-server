@@ -4,22 +4,22 @@ from flask import Flask, redirect, url_for, Blueprint, request, render_template,
 import datetime
 import time
 
-import satori
-import satori_common
-import satori_errors as error
-import satori_bearer_token as token
-import satori_dataset
-import satori_dataset_policy
-import satori_datastore
-import satori_data_access_users
-import satori_data_access_groups
+from satori import satori
+from satori import satori_common
+from satori import satori_bearer_token as token
+from satori import satori_errors as error
+from satori import satori_dataset
+from satori import satori_dataset_policy
+from satori import satori_datastore
+from satori import satori_data_access_users
+from satori import satori_data_access_groups
 
-satori_user = Blueprint('satoriuser', __name__)
+satori_group = Blueprint('satorigroup', __name__)
 
-@satori_user.route('/satori/user/<action>', methods=['GET'])
-def satori_add_or_remove_user(action):
+@satori_group.route('/satori/group/<action>', methods=['GET'])
+def satori_add_or_remove_group(action):
 
-	print("attempting SATORI ACTION: " + action + " user") if satori.logging else None
+	print("attempting SATORI ACTION: " + action + " group") if satori.logging else None
 
 	# TODO: we currenty have a placeholder "api key" hardwired into this code example (in satori.py)
 	# TODO: instead, we should call into a GCP or AWS secrets manager to retrieve a key that we have predefined.
@@ -34,26 +34,28 @@ def satori_add_or_remove_user(action):
 
 		if action == 'add':
 
-			if (None not in (
+			if (None not in ( 
 				request.args.get('duration'), 
 				request.args.get('dataset'), 
-				request.args.get('email'), 
+				request.args.get('groupname'), 
 				request.args.get('security_policy_id'))):
 
 				duration            = request.args.get('duration')
 				dataset_name        = request.args.get('dataset')
-				this_email          = request.args.get('email')
+				groupname           = request.args.get('groupname')
 				security_policy_id  = request.args.get('security_policy_id')
 				satori_expiration   = datetime.datetime.utcnow() + datetime.timedelta(hours=int(float(duration))) 
 
 				# find our dataset
 				dataset_id = satori_dataset.get_dataset_id_by_name(headers, dataset_name)
-
 				# get overall data policy ID for the dataset
 				data_policy_id = satori_dataset_policy.get_dataset_policy_id(headers, dataset_id)
 
-				#add the user to our access list
-				response = satori_data_access_users.add_user(headers, data_policy_id, email, satori_expiration, security_policy_id)
+				# get group ID by name
+				group_id = satori_data_access_groups.get_group_id_by_name(headers, groupname)
+
+				#add group ID to access list for the dataset				
+				response = satori_data_access_groups.add_group(headers, data_policy_id, group_id, satori_expiration, security_policy_id)
 				
 				if response.status_code == 409:
 					return error.USER_EXISTS
@@ -73,32 +75,30 @@ def satori_add_or_remove_user(action):
 
 			if (None not in (
 				request.args.get('dataset'), 
-				request.args.get('email'))):
+				request.args.get('groupname'))):
 
-				dataset_name        = request.args.get('dataset')
-				email          		= request.args.get('email')
+				dataset_name       = request.args.get('dataset')
+				groupname          = request.args.get('groupname')
 
 				# find our dataset
 				dataset_id = satori_dataset.get_dataset_id_by_name(headers, dataset_name)
-
 				# get overall data policy ID for the dataset
 				data_policy_id = satori_dataset_policy.get_dataset_policy_id(headers, dataset_id)
-				
-				# get the ID of our user that we want to remove from this data policy
-				access_id_to_remove = satori_data_access_users.find_access_id_to_remove_by_email(headers, data_policy_id, email)
-				
+				# get the ID of our group that we want to remove from this data policy
+				group_id = satori_data_access_groups.get_group_id_by_name(headers, groupname)
+
+				group_access_id = satori_data_access_groups.find_access_id_to_remove_group(headers, data_policy_id, group_id)
+
 				# remove access by ID
 				removal = requests.Response()
-				
-				if access_id_to_remove != "-1":
-					removal = satori_data_access_users.remove_access_id(headers, access_id_to_remove)
+				if group_id != "-1":
+					removal = satori_data_access_groups.remove_group(headers, group_access_id)
 
 				return render_template('result_removeuser.html', result = removal)
 	 
 			else:
-				return error.USER_PARAMS_MISSING           
+				return error.USER_PARAMS_MISSING
 		else:
 			return error.BAD_PATH
 	else:
 		return error.INVALID_APIKEY
-

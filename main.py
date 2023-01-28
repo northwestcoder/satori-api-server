@@ -7,18 +7,18 @@ import io
 
 from flask import Flask, redirect, url_for, render_template, request, session
 
-import satori
-import satori_common
-import satori_dataset
-import satori_dataset_policy
-import satori_data_access_users
-import satori_data_access_groups
+from satori import satori
+from satori import satori_common
+from satori import satori_dataset
+from satori import satori_dataset_policy
+from satori import satori_data_access_users
+from satori import satori_data_access_groups
 
-from route_user import satori_user
-from route_group import satori_group
-from route_others import satori_others
-from route_taxonomy import satori_taxonomy
-from route_location import satori_location
+from routes.route_user import satori_user
+from routes.route_group import satori_group
+from routes.route_others import satori_others
+from routes.route_taxonomy import satori_taxonomy
+from routes.route_location import satori_location
 
 
 app = Flask(__name__)

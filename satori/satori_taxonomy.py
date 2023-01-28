@@ -2,8 +2,8 @@ import json
 import requests
 from flask import jsonify, make_response
 
-import satori
-import satori_common
+from satori import satori
+from satori import satori_common
 
 def get_all_satori_taxonomy(headers):
 

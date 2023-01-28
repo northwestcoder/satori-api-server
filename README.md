@@ -6,7 +6,8 @@ This is a Python Flask-based web app which communicates with the Satori platform
 This is an example project meant for tutorial and learning purposes only.
 
 ##### Table of Contents  
-[Deploy](#deploy)  
+[Deployment](#deploy)  
+[Structure](#structure)  
 [Add/Remove Satori Users](#users)  
 [Add/Remove Satori Groups](#groups)  
 [Query Other Satori Info](#other)  
@@ -28,7 +29,7 @@ This project was tested using Google Cloud Run. The dockerfile included here is 
 2. Log into google cloud from the command line with ```gcloud auth login```
 3. Set your project with ```gcloud config set project YOUR_PROJECT_ID```
 4. Make sure Google Cloud Run API's are enabled for this project
-5. Create a new file ```satori.py``` with this content:
+5. Create a new file ```satori.py``` IN THE SATORI SUBDIRECTORY!... very important... with this content:
 
 ```
 account_id		= "YOUR_SATORI_ACCOUNT_ID"
@@ -67,6 +68,14 @@ ___
 _EXAMPLES:_
 
 _Once you have this flask server running in some cloud env or locally, you would then connect to it via browser/HTTPS for GETS and you would use a tool like Postman for POSTS, as indicated below._
+
+<a name="structure"/>
+
+## Structure of this repo
+
+- Python Flask has concepts like "routes" and "statics" and "templates", among other flask-y things. 
+- If you are solely interested in learning about the Satori API, head over the the ```satori``` subdirectory. 
+- We've tried to keep the functions simple and self-explanatory.
 
 <a name="users"/>
 
@@ -196,9 +205,9 @@ Method: GET
 There are two paths/methods in this example:
 
 First, you can retrieve all schema/table/column info associated with a Satori Datastore by using:
-```/satori/location/get_locations_by_datastore?datastore_id=YOUR_DATASTORE```
+```/satori/location/get_locations_by_datastore?datastore_id=YOUR_DATASTORE_ID```
 
 This is the raw full list of all schemas, tables and columns that Satori has discovered.
 
 Second, you can retrieve all of the above, but only for info which has been classified by Satori (or by you, by hand):
-```/satori/location/get_tags_by_datastore?datastore_id=YOUR_DATASTORE```
+```/satori/location/get_tags_by_datastore?datastore_id=YOUR_DATASTORE_ID```

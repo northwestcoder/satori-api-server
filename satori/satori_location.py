@@ -1,7 +1,8 @@
 import json
 import requests
-import satori
-import satori_common
+
+from satori import satori
+from satori import satori_common
 
 def get_locations_by_datastore(headers, datastore_id):
 

@@ -1,7 +1,8 @@
-import satori
 import json
 import requests
-import satori_common
+
+from satori import satori
+from satori import satori_common
 
 def add_user(headers, data_policy_id, email, expiration, security_policy_id):
 

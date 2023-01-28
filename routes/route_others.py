@@ -4,16 +4,16 @@ from flask import Flask, redirect, url_for, Blueprint, request, render_template,
 import datetime
 import time
 
-import satori
-import satori_common
-import satori_bearer_token
-import satori_errors as error
-import satori_security_policy
-import satori_datastore
-import satori_dataset
-import satori_taxonomy
-import satori_dac
-import satori_masking_profile
+from satori import satori
+from satori import satori_common
+from satori import satori_bearer_token
+from satori import satori_errors as error
+from satori import satori_security_policy
+from satori import satori_datastore
+from satori import satori_dataset
+from satori import satori_taxonomy
+from satori import satori_dac
+from satori import satori_masking_profile
 
 satori_others = Blueprint('satoriothers', __name__)
 
