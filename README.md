@@ -17,10 +17,11 @@ This is an example project meant for tutorial and learning purposes only.
 ___
 
 <a name="deploy"/>
-
 ## Deployment
 
-**GCP**: This project was tested using Google Cloud Run. The dockerfile included here is ready to go for GCP. Short GCP-specific steps to deploy this project:
+**GCP** 
+
+This project was tested using Google Cloud Run. The dockerfile included here is ready to go for GCP. Short GCP-specific steps to deploy this project:
 
 1. Install ```gcloud``` command line tools (we have tested on macOS)
 2. Log into google cloud from the command line with ```gcloud auth login```
@@ -41,15 +42,17 @@ logging 		= True
 	- Use the Satori [documentation](https://app.satoricyber.com/docs/api) to find ```account_id```, ```serviceaccount_id``` and ```serviceaccount_key``` info. 
 	- ```apihost```: defaults to app.satoricyber.com, this can be left as is unless instructed otherwise.
 	- ```apikey```: this is a made up token/secret for this python example, to protect this relay server. 
-		- Enter a unique and strong value here, and then also use that value in url requests or in the http header (either is supported)
-		- Note: this is a test harness - in production, instead of storing a secret or key inside code, you should instead look it up from a secret manager!
+		- Enter a unique and strong value here, and then also use that value in as a parameter in your url requests or in the http header (either is supported.
+		- Note: this is a test harness: in production, instead of storing a secret or key inside code, you should instead look it up from a secret manager!
 	- ```logging```: If ```True```, detailed info is output to the console for debugging.
 
 7. Deploy this project: navigate to where you have downloaded it, and run: ```gcloud run deploy```
 
-**AWS**: with some changes and testing, this docker/code approach will probably also work with AWS, e.g. their "app runner" product. 
+**AWS**
 
-**Local deployment**: 
+With some changes and testing, this docker/code approach will probably also work with AWS, e.g. their [app runner](https://aws.amazon.com/apprunner/) product. 
+
+**Local deployment**
 
 1. We tested with python 3.10.4 and recommend [pyenv](https://github.com/pyenv/pyenv) for your environment management. Assuming your python env is up and running:
 2. Create the satori.py file as above.
@@ -60,13 +63,11 @@ logging 		= True
 
 ___
 
-EXAMPLES:
+_EXAMPLES:_
 
-Once you have this flask server running in GCP or some cloud manner, you would connect to it via HTTPS for GETS and you would use a tool like Postman for POSTS.
+_Once you have this flask server running in some cloud env or locally, you would then connect to it via browser/HTTPS for GETS and you would use a tool like Postman for POSTS, as indicated below._
 
 <a name="users"/>
-
-
 ## Generic _/satori/user/add_ and _/satori/user/remove_ routes
 
 Method: GET 
@@ -75,53 +76,49 @@ These endpoints will add or remove a user (specifically, their email address) to
 
 These paths expects the following parameters:
 
-- apikey: a key we made up and put in ```satori.py```. If your incoming parameter value doesn't match, we will fail.
+- apikey: The key we made up and put in ```satori.py```. If your incoming parameter value doesn't match, we will fail.
 - email: the email/login for the user you want to add.
 - dataset: the name of the Satori Dataset to which you want to add this email/user.
-- duration: the number of hours this permission is allowed, after which the permission will expire.
-- Satori security policy id: you need to look these ID's up in the UX currently.
+- duration: the number of **hours** this permission is allowed, after which the permission will expire.
+- Satori security policy id: see [Query Other Satori Info](#other) for how to find all of the Security Policy ID's.
 
 A Complete URL Example: 
 
 ```
-http://<the.gcloud.deployed.url.app>/satori/user/add?apikey=YOURAPIKEY&dataset=Secured%20Data&email=john123.789smith@gmail.com&duration=20&security_policy_id=SATORI_SECURITY_POLICY_ID
+http://<the.gcloud.deployed.url.app>/satori/user/add?apikey=YOURAPIKEY&dataset=Secured%20Dataset&email=john123.789smith@gmail.com&duration=20&security_policy_id=SATORI_SECURITY_POLICY_ID
 ```
 
-- This would add john123.789smith@gmail.com to a Satori dataset called "Secured Data" with 20 hours of access and would assign john a specific security policy for those 20 hours.
+- This would add john123.789smith@gmail.com to a Satori dataset called "Secured Dataset" with 20 hours of access and would assign john a specific security policy for those 20 hours.
 - If the URL request is successful, depending on your client, you will see a web page with the datastores being managed by the Dataset you are trying to connect to.
 - The underlying API for this example is available [here](https://app.satoricyber.com/docs/api#post-/api/v1/data-access-rule/instant-access). The example POST body/payload is found in satori_data_access_users.py
 
-
-To remove a user, just change "add" to "remove" in the URL path. You will no longer need the ```security_policy_id``` or ```duration``` parameters:
+To remove a user, just change "add" to "remove" in the URL path. You can also drop the ```security_policy_id``` and ```duration``` parameters.
 
 ```
 http://<the.gcloud.deployed.url.app>/satori/user/remove?apikey=YOURAPIKEY&dataset=Secured%20Data&email=john123.789smith@gmail.com
 ```
 
 <a name="groups"/>
-
-
 ## Generic _/satori/group/add_ and _/satori/group/remove_ routes
 
 Method: GET
 
-Similar to ```user``` above, these paths will add a Satori Local Group by name. If more than one group matches your URL, this code will add the first entry found.
+Similar to [users](#users) above, these paths will add a Satori Local Group by name. If more than one group matches your URL, this code will add the first entry found.
 
 e.g. 
 
 ```
 http://<the.gcloud.deployed.url.app>/satori/group/add?apikey=YOURAPIKEY&dataset=Secured%20Data&groupname=Data%20Science%20Team&duration=20&security_policy_id=SATORI_SECURITY_POLICY_ID
+
 http://<the.gcloud.deployed.url.app>/satori/group/remove?apikey=YOURAPIKEY&dataset=Secured%20Data&groupname=Data%20Science%20Team&duration=20&security_policy_id=SATORI_SECURITY_POLICY_ID
 ```
 
 <a name="other"/>
-
 ## Generic /satori/other/TYPE
 
 Method: GET
 
-e.g. 
-
+For debugging or utility purposes, the following various routes return other types of information from your Satori account:
 ```
 http://<the.gcloud.deployed.url.app>/satori/other/custom_taxonomy
 http://<the.gcloud.deployed.url.app>/satori/other/datasets
@@ -132,22 +129,17 @@ http://<the.gcloud.deployed.url.app>/satori/other/security_policies
 http://<the.gcloud.deployed.url.app>/satori/other/taxonomy
 ```
 
-For debugging or utility purposes, these routes returns various other types of information in Satori
-
-
 <a name="one_taxonomy"/>
-
-## Find one Custom Taxonomy
+## /satori/taxonomy/find_by
 
 Method: GET
 
-- For integrations with external data catalogue or inventory systems, this is a useful lookup pattern.
+- For integrations with external data catalogues or inventory systems, this is a useful lookup pattern.
 - You can search by "name", "id" or "tag"
-- The general form of these GETS are:
+- The three forms are:
 	- ```http://<the.gcloud.deployed.url.app>/satori/taxonomy/find_by_id?search=YOURID```
 	- ```http://<the.gcloud.deployed.url.app>/satori/taxonomy/find_by_name?search=YOURNAME```
 	- ```http://<the.gcloud.deployed.url.app>/satori/taxonomy/find_by_tag?search=YOURTAG```
-	- where \<action\> is "name", "id" or "tag"
 - This will return a payload with the rest of the Custom Taxonomy, e.g. something like:
 
 ```
@@ -182,32 +174,24 @@ Method: GET
 ```
 
 <a name="create_taxonomy"/>
-
-## Create A Single Custom Taxonomy
+## /satori/taxonomy/create
 
 Method: POST
 
-Experimental
-
-/satori/taxonomy/create
-
-Expects a valid json body for the post, see [Satori Docs](https://app.satoricyber.com/docs/api#post-/api/v1/taxonomy/custom/classifier) for more info.
+Creates a single custom Satori Taxonomy. Experimental, WIP. Expects a valid json body for the post, see [Satori Docs](https://app.satoricyber.com/docs/api#post-/api/v1/taxonomy/custom/classifier) for more info.
 
 
 <a name="locations"/>
-
 ## Find Database Locations and Classifiers for a Datastore
 
 Method: GET
 
-There are two paths and methods in this example:
+There are two paths/methods in this example:
 
 First, you can retrieve all schema/table/column info associated with a Satori Datastore by using:
-
 ```/satori/location/get_locations_by_datastore?datastore_id=YOUR_DATASTORE```
 
 This is the raw full list of all schemas, tables and columns that Satori has discovered.
 
 Second, you can retrieve all of the above, but only for info which has been classified by Satori (or by you, by hand):
-
 ```/satori/location/get_tags_by_datastore?datastore_id=YOUR_DATASTORE```
