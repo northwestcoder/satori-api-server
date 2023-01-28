@@ -5,8 +5,6 @@ This is a Python Flask-based web app which communicates with the Satori platform
 
 This is an example project meant for tutorial and learning purposes only.
 
-
-
 ##### Table of Contents  
 [Deploy](#deploy)  
 [Add/Remove Satori Users](#users)  
