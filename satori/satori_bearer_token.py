@@ -9,8 +9,8 @@ def check_token():
 
 	headers = {}
 	
-	# Authenticate to Satori for a bearer token every hour, else use cache
-	if time.time() - satori_common.satori_token[1] > 3600:
+	# Authenticate to Satori for a bearer token every 2 hours, else use cache
+	if time.time() - satori_common.satori_token[1] > 7200:
 		print("refreshing bearer token")
 		satori_common.satori_token = satori_common.satori_auth()
 		satori_token = satori_common.satori_token
