@@ -1,7 +1,6 @@
 import json
 import requests
 
-
 from satori import satori
 from satori import satori_common
 

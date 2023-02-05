@@ -13,6 +13,7 @@ This is an example project meant for tutorial and learning purposes only.
 [Query Other Satori Info](#other)  
 [Get One Satori Taxonomy](#one_taxonomy)  
 [Create Satori Taxonomy](#create_taxonomy)  
+[Copy Satori Taxonomy](#copy_taxonomy)  
 [Query Satori Locations](#locations)  
 
 ___
@@ -193,7 +194,22 @@ Method: GET
 
 Method: POST
 
-Creates a single custom Satori Taxonomy. Experimental, WIP. Expects a valid json body for the post, see [Satori Docs](https://app.satoricyber.com/docs/api#post-/api/v1/taxonomy/custom/classifier) for more info.
+Creates a single custom Satori Taxonomy. Experimental, WIP, meant for a future integration with a data catalog platform. Expects a valid json body for the post, see [Satori Docs](https://app.satoricyber.com/docs/api#post-/api/v1/taxonomy/custom/classifier) for more info.
+
+
+<a name="copy_taxonomy"/>
+
+## /satori/copy/taxonomy
+
+Method: GET
+
+
+This route requires a source and target Satori Datastore ID. It will then copy all taxonomies configured in the Satori platform from source to target. This can be very useful for situations where you have put taxonomy configuration effort into a DEV/TEST database, and then want to copy that information to PROD.
+
+Example:
+```
+http://<the.gcloud.deployed.url.app>/satori/copy/taxonomy?apikey=YOUR_API_KEY&source_datastore_id=ID_OF_SOURCE_DATASTORE&target_datastore_id=ID_OF_TARGET_DATASTORE
+```
 
 
 <a name="locations"/>

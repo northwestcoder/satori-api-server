@@ -59,3 +59,24 @@ def satori_get_others(action):
 
 	else:
 		return error.INVALID_APIKEY
+
+@satori_others.route('/satori/datastore', methods=['GET'])
+def satori_get_one_datastore():
+
+	if satori.apikey in (request.args.get('apikey'), request.headers.get('apikey')):
+
+		if request.args.get('datastore_id') is not None:
+
+			# Authenticate to Satori for a bearer token every hour, else use cache
+			headers = satori_bearer_token.check_token()
+
+			print("attempting to retrieve security policies") if satori.logging else None
+			response = satori_datastore.get_one_datastore(headers, request.args.get('datastore_id'))
+			return response.json()
+
+		else:
+			return error.USER_PARAMS_MISSING
+
+	else:
+		return error.INVALID_APIKEY
+
