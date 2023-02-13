@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block body %}
+
+<table cellpadding="10" align="left">
+  <tr bgcolor="#ffffff"><td>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="https://satoricyber.com/wp-content/uploads/LogoDark2.svg" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</td></tr></table>
+
+<br/><br/><br/>
+
+  <div><b>COLLIBRA TAGS WERE ADDED - you can close this window</b></div>
+  <br/>
+
+      {% for key, value in result.items() %}
+
+    <tr class="small">
+       <td class="small"> {{ key }} </td>
+       <td class="small"> {{ value }} </td>
+    </tr>
+
+
+    {% endfor %}
+    
+<br/><br/><br/>
+
+    
+{% endblock %}
+{% block scripts %}
+{% endblock %}

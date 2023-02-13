@@ -70,7 +70,7 @@ def taxonomy_helper(myjson, action, searchkey, result):
 def get_one_taxonomy(headers, action, taxonomy_name):
 
 	url = "https://{}/api/v1/taxonomy/custom?accountId={}".format(satori.apihost, satori.account_id)
-	print("trying to find all taxonomy: " + url) if satori.logging else None
+	print("trying to find info for taxonomy: " + taxonomy_name) if satori.logging else None
 
 	try:
 		response = requests.get(url, headers=headers)
@@ -79,7 +79,7 @@ def get_one_taxonomy(headers, action, taxonomy_name):
 		print("EXCEPTION: ", type(err))
 	else:
 		taxonomies = response.json()
-		result = taxonomy_helper(taxonomies, action, taxonomy_name, {})
+		result = taxonomy_helper(taxonomies, "name", taxonomy_name, {})
 		print("taxonomy_info: " + str(result)) if satori.logging else None
 		return result
 

@@ -14,7 +14,10 @@ This is an example project meant for tutorial and learning purposes only.
 [Get One Satori Taxonomy](#one_taxonomy)  
 [Create Satori Taxonomy](#create_taxonomy)  
 [Copy Satori Taxonomy](#copy_taxonomy)  
-[Query Satori Locations](#locations)  
+[Query Satori Locations](#locations)
+
+[Collibra Integration](#collibra)
+
 
 ___
 
@@ -39,6 +42,9 @@ serviceaccount_key	= "YOUR_SATORI_SERVICE_ACCOUNT_KEY"
 apihost			= "app.satoricyber.com"
 apikey 			= "YOUR_NEW_MADE_UP_KEY"
 logging 		= True
+postgres_scan_user  = ""
+postgres_scan_pw  = ""
+
 ```
 
 6. Update all of the values (using the quotes) in your new ```satori.py``` file or else this example will fail. 
@@ -48,6 +54,7 @@ logging 		= True
 		- Enter a unique and strong value here, and then also use that value in as a parameter in your url requests or in the http header (either is supported.
 		- Note: this is a test harness: in production, instead of storing a secret or key inside code, you should instead look it up from a secret manager!
 	- ```logging```: If ```True```, detailed info is output to the console for debugging.
+  - postgres info: you can leave blank, or, populate with satori user info for secret database scanning feature :)
 
 7. Deploy this project: navigate to where you have downloaded it, and run: ```gcloud run deploy```
 
@@ -227,3 +234,28 @@ This is the raw full list of all schemas, tables and columns that Satori has dis
 
 Second, you can retrieve all of the above, but only for info which has been classified by Satori (or by you, by hand):
 ```/satori/location/get_tags_by_datastore?datastore_id=YOUR_DATASTORE_ID```
+
+
+<a name="collibra"/>
+
+## Update Satori data location with Collibra tags
+
+Method: GET
+
+- Experimental. This part of the example code requires you to have a Collibra account and the Collibra Rest API configured.
+- In Collibra, you can tag data elements. 
+- If you tag these elements with the standard Satori Taxonomy (e.g. "PHONE", "EMAIL", "PERSONNAME", etc), then this integration will attempt to find the corresponding location in Satori and add those tags to the relevant columns.
+- See "route_collibra.py" and the collibra folder for study and more information.
+- The basic form of the URL is
+  - https://relayserver/collibra/update_satori?datastore_id=YOURSATORI_DS_ID&database=YOURDB&schema=YOURSCHEMA&table=YOURTABLE
+
+To use this example, you need to edit ./collibra/collibra.py with your correct account info:
+```
+username = "YOUR_COLLIBRA_USER_EMAIL"
+password = "YOUR_COLLIBRA_PASSWORD"
+```
+
+
+
+
+
