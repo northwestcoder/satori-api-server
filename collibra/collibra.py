@@ -1,0 +1,2 @@
+username = "YOUR_COLLIBRA_USER_EMAIL"
+password = "YOUR_COLLIBRA_PASSWORD"
