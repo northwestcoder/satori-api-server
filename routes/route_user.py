@@ -43,6 +43,9 @@ def satori_add_or_remove_user(action):
 				duration            = request.args.get('duration')
 				dataset_name        = request.args.get('dataset')
 				email          		= request.args.get('email')
+				print("trying to add user by email: " + email) if satori.logging else None
+
+
 				security_policy_id  = request.args.get('security_policy_id')
 				satori_expiration   = datetime.datetime.utcnow() + datetime.timedelta(hours=int(float(duration))) 
 
@@ -76,7 +79,8 @@ def satori_add_or_remove_user(action):
 				request.args.get('email'))):
 
 				dataset_name        = request.args.get('dataset')
-				email          		= request.args.get('email')
+				email 				= requests.utils.quote(request.args.get('email'))
+				print("trying to remove user by email: " + email) if satori.logging else None
 
 				# find our dataset
 				dataset_id = satori_dataset.get_dataset_id_by_name(headers, dataset_name)

@@ -48,6 +48,7 @@ def find_access_id_to_remove_by_email(headers, data_policy_id, email):
 
 	try:
 		response = requests.get(url, headers=headers)
+		print(response.text)
 		response.raise_for_status()
 	except requests.exceptions.RequestException as err:
 		print("EXCEPTION: ", type(err))

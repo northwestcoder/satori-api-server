@@ -56,7 +56,8 @@ postgres_scan_pw  = ""
 	- ```logging```: If ```True```, detailed info is output to the console for debugging.
   - postgres info: you can leave blank, or, populate with satori user info for secret database scanning feature :)
 
-7. Deploy this project: navigate to where you have downloaded it, and run: ```gcloud run deploy```
+7. Check and verify requirements.txt - in particular, psycopg2 and psycopg2-binary can be picky sometimes.
+8. Deploy this project: navigate to where you have downloaded it, and run: ```gcloud run deploy```
 
 **AWS**
 
@@ -66,7 +67,8 @@ With some changes and testing, this docker/code approach will probably also work
 
 1. We tested with python 3.10.4 and recommend [pyenv](https://github.com/pyenv/pyenv) for your environment management. Assuming your python env is up and running:
 2. Create the satori.py file as above.
-3. at the command line:
+3. Check and verify requirements.txt - in particular, psycopg2 and psycopg2-binary can be picky sometimes.
+4. at the command line:
 - ```pip install -r requirements.txt```
 - ```python main.py```
 
