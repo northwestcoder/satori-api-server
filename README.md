@@ -65,10 +65,22 @@ With some changes and testing, this docker/code approach will probably also work
 
 **Local deployment**
 
-1. We tested with python 3.10.4 and recommend [pyenv](https://github.com/pyenv/pyenv) for your environment management. Assuming your python env is up and running:
-2. Create the satori.py file as above.
-3. Check and verify requirements.txt - in particular, psycopg2 and psycopg2-binary can be picky sometimes.
-4. at the command line:
+1. We tested with python 3.10.12 and recommend [pyenv](https://github.com/pyenv/pyenv) for your environment management. 
+2. pyenv quick start for macOS:
+  - command line:
+  - ```brew install readline xz```
+  - ```brew install pyenv pyenv-virtualenv```
+  - add to .bashrc or whatever terminal config:
+  - ```eval "$(pyenv init -)"```
+  - ```eval "$(pyenv virtualenv-init -)"```
+  - command line:
+  - ```pyenv install 3.10.12```
+  - ```pyenv virtualenv 3.10.12 satori-api-server```
+  - ```pyenv global satori-api-server```
+3. Assuming your python env is up and running:
+4. Create the satori.py file as above.
+5. Check and verify requirements.txt - in particular, psycopg2 and psycopg2-binary can be picky sometimes.
+6. at the command line:
 - ```pip install -r requirements.txt```
 - ```python main.py```
 
